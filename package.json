@@ -1,0 +1,18 @@
+{
+  "name": "chrome-extension-ci",
+  "version": "0.0.1",
+  "description": "Example chrome extension tested in CI",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/**/*-test.js"
+  },
+  "author": "Adam Kliment",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chromedriver": "^2.21.2",
+    "mocha": "^2.5.3",
+    "selenium-standalone": "^5.5.0",
+    "webdriverio": "^4.2.1"
+  }
+}
