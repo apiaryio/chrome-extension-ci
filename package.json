@@ -4,7 +4,9 @@
   "description": "Example chrome extension tested in CI",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/**/*-test.js"
+    "test": "mocha ./test/**/*-test.js",
+    "selenium-install": "selenium-standalone install",
+    "selenium-start": "selenium-standalone start"
   },
   "author": "Adam Kliment",
   "license": "MIT",
