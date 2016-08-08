@@ -32,7 +32,7 @@ helpers = function(browserInstance){
     browserInstance
       .execute.apply(browserInstance, argumentArray)
       .then(function(result){
-        callback(result)
+        callback(undefined, result)
       }).call();
   }
 
@@ -40,7 +40,7 @@ helpers = function(browserInstance){
     browserInstance
       .executeAsync.apply(browserInstance, argumentArray)
       .then(function(result){
-        callback(result)
+        callback(undefined, result)
       }).call();
   }
 

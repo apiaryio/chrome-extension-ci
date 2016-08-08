@@ -59,7 +59,7 @@ describe('Webdriver.io', function(){
         return(result);
       };
 
-      helpers.execute([fn, 1, 2], function(result){
+      helpers.execute([fn, 1, 2], function(err, result){
         assert.equal(result.value, 3);
         done()
       })
@@ -67,7 +67,7 @@ describe('Webdriver.io', function(){
   });
 
   describe('when I execute an async JS code', function(){
-    it.only('should return result', function(done){
+    it('should return result', function(done){
 
       fn = function(number1, number2, callback) {
         var result = number1 + number2;
@@ -76,7 +76,7 @@ describe('Webdriver.io', function(){
         return("not a return value");
       };
 
-      helpers.executeAsync([fn, 1, 2], function(result){
+      helpers.executeAsync([fn, 1, 2], function(err, result){
         assert.equal(result.value, 3);
         done();
       })
@@ -92,10 +92,11 @@ describe('Webdriver.io', function(){
         return(result);
       };
 
-      async.times(5, function(n, next) {
-        helpers.execute([fn, 1, 2], function(result){
+      async.times(100, function(n, next) {
+        helpers.execute([fn, 1, 2], function(err, result){
+
           assert.equal(result.value, 3);
-          next()
+          next();
         })
       }, function(err, users) {
         done()
