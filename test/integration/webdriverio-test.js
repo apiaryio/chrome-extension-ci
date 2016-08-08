@@ -1,6 +1,8 @@
 var fs = require('fs');
 var assert = require('chai').assert;
 var webdriverio = require('webdriverio');
+var helpers = require('../webdriver-helpers')
+
 
 var options = {
   desiredCapabilities: {
@@ -12,32 +14,7 @@ var options = {
     }
   }
 };
-
 var client = webdriverio.remote(options);
-
-getExtensionName = function(){
-  manifestFile = 'manifest.json'
-  manifest = JSON.parse(fs.readFileSync(manifestFile).toString())
-  return(manifest['name'])
-}
-
-getExtensionId = function(browserInstance, callback){
-  extensionName = getExtensionName()
-  var extensionIndex = null;
-  browserInstance
-    .url("chrome://extensions")
-    .waitForExist('iframe[name=extensions]')
-    .frame("extensions")
-    .click('#toggle-dev-on')
-    .getText('h2.extension-title')
-    .then(function(extensionTitles){
-      extensionIndex = extensionTitles.indexOf(extensionName)
-    }).getText('.extension-id')
-    .then(function(extensionIds){
-      extensionId = extensionIds[extensionIndex];
-      callback(undefined, extensionId)
-    })
-}
 
 describe('Webdriver.io', function(){
   this.timeout(60000);
@@ -52,7 +29,7 @@ describe('Webdriver.io', function(){
 
   describe ('when I go to the extension page', function(){
     it('the page should have the extension name listed', function(done){
-      var extensionName = getExtensionName()
+      var extensionName = helpers.getExtensionName()
       client
         .url("chrome://extensions")
         .waitForExist('iframe[name=extensions]')
@@ -66,7 +43,7 @@ describe('Webdriver.io', function(){
     });
 
     it('I should be able to get the extension id', function(done){
-      getExtensionId(client, function(err, extensionId){
+      helpers.getExtensionId(client, function(err, extensionId){
         assert.lengthOf(extensionId, 32);
         done();
       })
