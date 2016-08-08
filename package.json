@@ -11,6 +11,7 @@
   "author": "Adam Kliment",
   "license": "MIT",
   "devDependencies": {
+    "async": "^2.0.1",
     "chai": "^3.5.0",
     "chromedriver": "^2.21.2",
     "mocha": "^2.5.3",

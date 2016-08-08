@@ -1,8 +1,6 @@
-var fs = require('fs');
+var async = require('async');
 var assert = require('chai').assert;
 var webdriverio = require('webdriverio');
-var helpers = require('../webdriver-helpers')
-
 
 var options = {
   desiredCapabilities: {
@@ -14,7 +12,10 @@ var options = {
     }
   }
 };
+
 var client = webdriverio.remote(options);
+var helpers = require('../webdriver-helpers')(client);
+
 
 describe('Webdriver.io', function(){
   this.timeout(60000);
@@ -43,14 +44,14 @@ describe('Webdriver.io', function(){
     });
 
     it('I should be able to get the extension id', function(done){
-      helpers.getExtensionId(client, function(err, extensionId){
+      helpers.getExtensionId(function(err, extensionId){
         assert.lengthOf(extensionId, 32);
         done();
       })
     });
   });
 
-  describe('when I execute a JS code', function(){
+  describe('when I execute a sync JS code', function(){
     it('should return result', function(done){
 
       fn = function(number1, number2) {
@@ -58,35 +59,47 @@ describe('Webdriver.io', function(){
         return(result);
       };
 
-      client
-        .execute(fn, 1, 2)
-        .then(function(result){
-          assert.equal(result.value, 3);
-        })
-        .call(done);
-
+      helpers.execute([fn, 1, 2], function(result){
+        assert.equal(result.value, 3);
+        done()
+      })
     });
   });
 
-  describe('when I execute JS code 100 times in one context',function(){
-    it('should return result 100 times', function(done){
+  describe('when I execute an async JS code', function(){
+    it.only('should return result', function(done){
+
+      fn = function(number1, number2, callback) {
+        var result = number1 + number2;
+        console.log(callback);
+        callback(result);
+        return("not a return value");
+      };
+
+      helpers.executeAsync([fn, 1, 2], function(result){
+        assert.equal(result.value, 3);
+        done();
+      })
+    });
+  });
+
+
+  describe('when I execute sync JS code 100 times in one context',function(){
+    it('should return result 100 times and in a reasonable time', function(done){
 
       fn = function(number1, number2) {
         var result = number1 + number2;
         return(result);
       };
 
-      var i = 0;
-      while(i < 100){
-        i++;
-
-        client
-          .execute(fn, 1, 2)
-          .then(function(result){
-            assert.equal(result.value, 3);
-          })
-      }
-      client.call(done);
+      async.times(5, function(n, next) {
+        helpers.execute([fn, 1, 2], function(result){
+          assert.equal(result.value, 3);
+          next()
+        })
+      }, function(err, users) {
+        done()
+      });
     });
   });
 });
