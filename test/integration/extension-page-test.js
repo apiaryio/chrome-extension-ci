@@ -49,14 +49,12 @@ describe('Extension to web page integration', function(){
   schemas.forEach(function(schema){
     describe('Externally connectable', function(){
       before(function(done){
+
         // Spin up the local server listsening on:
-        // - '  third.second.first:3000'
+        // - 'third.second.first:3000'
         // - 'fourth.third.second.first:3000'
-
         app = express();
-
         app.use(express.static('test/fixtures/embed/'));
-
         app.get('/', function (req, res) {
           res.send('Hello World!');
         });
