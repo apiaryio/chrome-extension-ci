@@ -1,0 +1,29 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <button onclick="addText()" id="interaction">Get the data from the extension</button>
+    <div id="div1">
+      <p id="p1">This is a paragraph.</p>
+      <p id="p2">This is another paragraph.</p>
+    </div>
+
+    <script>
+    function addText(){
+      chrome.runtime.sendMessage(extId, "Foo Bar", function(response){
+        var para = document.createElement("p");
+        var node = document.createTextNode(response);
+        para.appendChild(node);
+
+        var att = document.createAttribute("id");
+        att.value = "extension-data";
+        para.setAttributeNode(att)
+
+        var element = document.getElementById("div1");
+        element.appendChild(para);
+      });
+    }
+    </script>
+  </body>
+
+</html>

@@ -25,3 +25,8 @@ before_script:
 
 script:
   - "npm test"
+
+addons:
+  hosts:
+    - fourth.third.second.first
+    - third.second.first

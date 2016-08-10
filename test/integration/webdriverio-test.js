@@ -1,4 +1,4 @@
-var fs = require('fs');
+var async = require('async');
 var assert = require('chai').assert;
 var webdriverio = require('webdriverio');
 
@@ -14,30 +14,8 @@ var options = {
 };
 
 var client = webdriverio.remote(options);
+var helpers = require('../webdriver-helpers')(client);
 
-getExtensionName = function(){
-  manifestFile = 'manifest.json'
-  manifest = JSON.parse(fs.readFileSync(manifestFile).toString())
-  return(manifest['name'])
-}
-
-getExtensionId = function(browserInstance, callback){
-  extensionName = getExtensionName()
-  var extensionIndex = null;
-  browserInstance
-    .url("chrome://extensions")
-    .waitForExist('iframe[name=extensions]')
-    .frame("extensions")
-    .click('#toggle-dev-on')
-    .getText('h2.extension-title')
-    .then(function(extensionTitles){
-      extensionIndex = extensionTitles.indexOf(extensionName)
-    }).getText('.extension-id')
-    .then(function(extensionIds){
-      extensionId = extensionIds[extensionIndex];
-      callback(undefined, extensionId)
-    })
-}
 
 describe('Webdriver.io', function(){
   this.timeout(60000);
@@ -52,7 +30,7 @@ describe('Webdriver.io', function(){
 
   describe ('when I go to the extension page', function(){
     it('the page should have the extension name listed', function(done){
-      var extensionName = getExtensionName()
+      var extensionName = helpers.getExtensionName()
       client
         .url("chrome://extensions")
         .waitForExist('iframe[name=extensions]')
@@ -66,14 +44,14 @@ describe('Webdriver.io', function(){
     });
 
     it('I should be able to get the extension id', function(done){
-      getExtensionId(client, function(err, extensionId){
+      helpers.getExtensionId(function(err, extensionId){
         assert.lengthOf(extensionId, 32);
         done();
       })
     });
   });
 
-  describe('when I execute a JS code', function(){
+  describe('when I execute a sync JS code', function(){
     it('should return result', function(done){
 
       fn = function(number1, number2) {
@@ -81,35 +59,48 @@ describe('Webdriver.io', function(){
         return(result);
       };
 
-      client
-        .execute(fn, 1, 2)
-        .then(function(result){
-          assert.equal(result.value, 3);
-        })
-        .call(done);
-
+      helpers.execute([fn, 1, 2], function(err, result){
+        assert.equal(result.value, 3);
+        done()
+      })
     });
   });
 
-  describe('when I execute JS code 100 times in one context',function(){
-    it('should return result 100 times', function(done){
+  describe('when I execute an async JS code', function(){
+    it('should return result', function(done){
+
+      fn = function(number1, number2, callback) {
+        var result = number1 + number2;
+        console.log(callback);
+        callback(result);
+        return("not a return value");
+      };
+
+      helpers.executeAsync([fn, 1, 2], function(err, result){
+        assert.equal(result.value, 3);
+        done();
+      })
+    });
+  });
+
+
+  describe('when I execute sync JS code 100 times in one context',function(){
+    it('should return result 100 times and in a reasonable time', function(done){
 
       fn = function(number1, number2) {
         var result = number1 + number2;
         return(result);
       };
 
-      var i = 0;
-      while(i < 100){
-        i++;
+      async.times(100, function(n, next) {
+        helpers.execute([fn, 1, 2], function(err, result){
 
-        client
-          .execute(fn, 1, 2)
-          .then(function(result){
-            assert.equal(result.value, 3);
-          })
-      }
-      client.call(done);
+          assert.equal(result.value, 3);
+          next();
+        })
+      }, function(err, users) {
+        done()
+      });
     });
   });
 });

@@ -11,10 +11,13 @@
   "author": "Adam Kliment",
   "license": "MIT",
   "devDependencies": {
+    "async": "^2.0.1",
     "chai": "^3.5.0",
     "chromedriver": "^2.21.2",
+    "express": "^4.14.0",
     "mocha": "^2.5.3",
     "selenium-standalone": "^5.5.0",
+    "server-destroy": "^1.0.1",
     "webdriverio": "^4.2.1"
   }
 }
