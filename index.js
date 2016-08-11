@@ -1,6 +1,6 @@
-dispatcher = require('./lib/dispatcher');
+var dispatcher = require('./lib/dispatcher');
 
-exportObject = {}
+var exportObject = {}
 exportObject.dispatcher = dispatcher
 
 module.exports = exportObject
