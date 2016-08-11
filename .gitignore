@@ -1,4 +1,5 @@
 # Distributed code (source code lives in /src)
+js/build.js
 /lib
 
 # Common for .gitignore and .npmignore

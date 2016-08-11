@@ -94,7 +94,11 @@ describe('Extension to web page integration', function(){
           describe('And I send a message to the extension', function(){
             it('The page JS should get an answer', function(done){
               fn = function(extId, callback){
-                chrome.runtime.sendMessage(extId, "Foo Bar", function(response){
+                message = {
+                  action: "echo",
+                  data: "Booboo"
+                }
+                chrome.runtime.sendMessage(extId, message, function(response){
                   callback(response)
                 });
               }
@@ -103,7 +107,9 @@ describe('Extension to web page integration', function(){
                 .url(schema + '://third.second.first:3000/')
                 .then(function(){
                   helpers.executeAsync([fn, extensionId], function(err, result){
-                    assert.equal(result.value, "BooBoo")
+                    assert.isObject(result['value'])
+                    assert.property(result['value'], 'data')
+                    assert.equal(result['value']['data'], 'Booboo')
                     done()
                   })
                 });
@@ -115,7 +121,11 @@ describe('Extension to web page integration', function(){
           describe('And I send a message to the extension', function(){
             it('The page JS should get an answer', function(done){
               fn = function(extId, callback){
-                chrome.runtime.sendMessage(extId, "Foo Bar", function(response){
+                message = {
+                  action: "echo",
+                  data: "Booboo"
+                }
+                chrome.runtime.sendMessage(extId, message, function(response){
                   callback(response)
                 });
               }
@@ -124,7 +134,9 @@ describe('Extension to web page integration', function(){
                 .url(schema + '://third.second.first:3000/')
                 .then(function(){
                   helpers.executeAsync([fn, extensionId], function(err, result){
-                    assert.equal(result.value, "BooBoo")
+                    assert.isObject(result['value'])
+                    assert.property(result['value'], 'data')
+                    assert.equal(result['value']['data'], 'Booboo')
                     done()
                   })
                 });
@@ -138,7 +150,11 @@ describe('Extension to web page integration', function(){
           describe('And I send a message to the extension', function(){
             it('The page JS should get an answer', function(done){
               fn = function(extId, callback){
-                chrome.runtime.sendMessage(extId, "Foo Bar", function(response){
+                message = {
+                  action: "echo",
+                  data: "Booboo"
+                }
+                chrome.runtime.sendMessage(extId, message, function(response){
                   callback(response)
                 });
               }
@@ -147,7 +163,9 @@ describe('Extension to web page integration', function(){
                 .url(schema + '://fourth.third.second.first:3000/')
                 .then(function(){
                   helpers.executeAsync([fn, extensionId], function(err, result){
-                    assert.equal(result.value, "BooBoo")
+                    assert.isObject(result['value'])
+                    assert.property(result['value'], 'data')
+                    assert.equal(result['value']['data'], 'Booboo')
                     done()
                   })
                 });
@@ -218,7 +236,7 @@ describe('Extension to web page integration', function(){
                       .waitForExist('#extension-data', 1000)
                       .getText("#extension-data")
                       .then(function(text){
-                        assert.equal(text, "BooBoo");
+                        assert.equal(text, "Booboo");
                         done();
                       }).call();
                   });

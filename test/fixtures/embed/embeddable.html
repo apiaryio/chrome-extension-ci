@@ -10,9 +10,14 @@
 
     <script>
     function addText(){
-      chrome.runtime.sendMessage(extId, "Foo Bar", function(response){
+      var message = {
+        "action": "echo",
+        "data": "Booboo"
+      }
+
+      chrome.runtime.sendMessage(extId, message, function(response){
         var para = document.createElement("p");
-        var node = document.createTextNode(response);
+        var node = document.createTextNode(response['data']);
         para.appendChild(node);
 
         var att = document.createAttribute("id");
