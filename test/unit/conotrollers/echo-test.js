@@ -1,5 +1,5 @@
 assert = require('chai').assert
-echoController = require('../../../lib/controllers/echo')
+echoController = require('../../../src/controllers/echo')
 sinon = require('sinon')
 
 describe("Echo controller", function(){

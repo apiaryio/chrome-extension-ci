@@ -2,11 +2,11 @@ var assert = require('chai').assert
 var sinon = require('sinon')
 var proxyquire = require('proxyquire').noCallThru()
 
-var echoController = require('../../lib/controllers/echo')
+var echoController = require('../../src/controllers/echo')
 
 var echoControllerSpy = sinon.spy(echoController);
 
-var dispatcher = proxyquire('../../lib/dispatcher', {
+var dispatcher = proxyquire('../../src/dispatcher', {
   './controllers/echo': echoControllerSpy
 })
 
