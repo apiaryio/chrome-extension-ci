@@ -1,0 +1,19 @@
+<html>
+  <head>
+  </head>
+  <!--
+  This is not easy: https://developer.chrome.com/webstore/inline_installation
+  -->
+  <body>
+    <h1>inline extnsion installation</h1>
+    <div onclick="inlineInstall()">
+      <span>click me !!! </span>
+    </div>
+    <script>
+    function inlineInstall(){
+      url = "https://chrome.google.com/webstore/detail/anydo/ocgddccilgpeepgglnlpchkpgamkgmld"
+      chrome.webstore.install(url, function(){}, function(){})
+    }
+    </script>
+  </body>
+</html>
