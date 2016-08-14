@@ -42,7 +42,7 @@ describe('Extension to web page integration', function(){
     done();
   })
 
-  var schemas = [
+  var schemass = [
     'http',
     'https'
   ]

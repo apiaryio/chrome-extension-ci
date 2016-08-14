@@ -10,8 +10,7 @@ var dispatcher = proxyquire('../../lib/dispatcher', {
   './controllers/echo': echoControllerSpy
 })
 
-
-describe('Module Dispatcher', function(){
+describe('Extension Message Dispatcher', function(){
   it('exports a function', function(){
     assert.isFunction(dispatcher);
   })
