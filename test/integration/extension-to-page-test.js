@@ -42,11 +42,11 @@ describe('Extension to web page integration', function(){
     done();
   })
 
-  var schemass = [
+  var schemes = [
     'http',
     'https'
   ]
-  schemas.forEach(function(schema){
+  schemes.forEach(function(scheme){
     describe('Externally connectable', function(){
       before(function(done){
 
@@ -59,7 +59,7 @@ describe('Extension to web page integration', function(){
           res.send('Hello World!');
         });
 
-        if(schema === 'http') {
+        if(scheme === 'http') {
           backendServer = app.listen(3000, function(){
             enableDestroy(backendServer);
             done()
@@ -104,7 +104,7 @@ describe('Extension to web page integration', function(){
               }
 
               client
-                .url(schema + '://third.second.first:3000/')
+                .url(scheme + '://third.second.first:3000/')
                 .then(function(){
                   helpers.executeAsync([fn, extensionId], function(err, result){
                     assert.isObject(result['value'])
@@ -131,7 +131,7 @@ describe('Extension to web page integration', function(){
               }
 
               client
-                .url(schema + '://third.second.first:3000/')
+                .url(scheme + '://third.second.first:3000/')
                 .then(function(){
                   helpers.executeAsync([fn, extensionId], function(err, result){
                     assert.isObject(result['value'])
@@ -160,7 +160,7 @@ describe('Extension to web page integration', function(){
               }
 
               client
-                .url(schema + '://fourth.third.second.first:3000/')
+                .url(scheme + '://fourth.third.second.first:3000/')
                 .then(function(){
                   helpers.executeAsync([fn, extensionId], function(err, result){
                     assert.isObject(result['value'])
@@ -186,7 +186,7 @@ describe('Extension to web page integration', function(){
             res.send('Hello World!');
           });
 
-          if(schema === 'http') {
+          if(scheme === 'http') {
             iframeBackend = app.listen(3001, function(){
               enableDestroy(iframeBackend);
               done()
@@ -220,7 +220,7 @@ describe('Extension to web page integration', function(){
             it("Should have the data returned from the extension", function(done){
 
               client
-                .url(schema + '://localhost:3001/embed-' + schema + '.html')
+                .url(scheme + '://localhost:3001/embed-' + scheme + '.html')
                 .waitForExist('iframe[name=embed]',1000)
                 .frame("embed")
                 .then(function(){
