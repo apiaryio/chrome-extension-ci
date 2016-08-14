@@ -1,4 +1,4 @@
-var dispatcher = require('./lib/dispatcher');
+var dispatcher = require('./src/dispatcher');
 
 var exportObject = {}
 exportObject.dispatcher = dispatcher
