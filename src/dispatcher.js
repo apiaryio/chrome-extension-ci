@@ -1,4 +1,5 @@
 var echoController = require('./controllers/echo')
+var httpRequestController = require('./controllers/http-request')
 
 // The message dispatcher is meant to be plugged in as a listener
 // for background script's 'onMessageExternal' event.
@@ -42,6 +43,11 @@ dispatcher = function (request, sender, sendResponse) {
     // Add your actions heress
     case "echo":
       return echoController(request, sender, sendResponse)
+
+    // ./src/controllers/http-request.js
+    case "httpRequest":
+      return httpRequestController(request, sender, sendResponse)
+
 
     // Unknown action controller
     default:
