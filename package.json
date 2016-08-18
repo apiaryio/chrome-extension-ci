@@ -16,9 +16,11 @@
   "license": "MIT",
   "devDependencies": {
     "async": "^2.0.1",
+    "body-parser": "^1.15.2",
     "browserify": "^13.1.0",
     "chai": "^3.5.0",
     "chromedriver": "^2.21.2",
+    "concat-stream": "^1.5.1",
     "express": "^4.14.0",
     "mocha": "^2.5.3",
     "proxyquire": "^1.7.10",
@@ -27,5 +29,12 @@
     "sinon": "^1.17.5",
     "watch-run": "^1.2.4",
     "webdriverio": "^4.2.1"
+  },
+  "dependencies": {
+    "http-browserify": "^1.7.0",
+    "stream-http": "^2.3.1"
+  },
+  "browser": {
+    "http": "stream-http"
   }
 }
