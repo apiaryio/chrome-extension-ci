@@ -59,7 +59,6 @@ var configureExpressEndpoint = function(transaction, app){
       method: req['method'],
       headers: req['headers']
     };
-
     Object.keys(tRes['headers']).forEach(function(key){
       res.set(key, tRes['headers'][key]);
     });
@@ -84,7 +83,8 @@ describe.only('HTTP Request', function(){
   });
 
   after(function(done){
-    //client.end().call();
+    // Comment this line out to keep the browser open for debugging
+    client.end().call();
     done();
   })
 

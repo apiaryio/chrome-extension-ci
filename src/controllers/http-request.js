@@ -1,3 +1,5 @@
+//TODO how to debug a syntactic error here
+
 var url = require('url')
 var http = require('http')
 
@@ -16,7 +18,7 @@ httpRequestController = function(request, sender, sendResponse){
   })
 
 
-  // TODO comment this out and try to debug it. Chrome sends to selenimu just an empty response
+  // TODO un-comment this and try to debug it. Chrome sends to seleniunm just an empty response
   // Object.keys(httpRequest['headers']).each(function(key){
   //   request.setRequestHeader(key, httpRequest['headers'][value]);
   // })
