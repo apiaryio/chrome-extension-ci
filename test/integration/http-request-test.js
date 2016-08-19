@@ -143,7 +143,6 @@ describe.only('HTTP Request', function(){
 
                 var timeout = setTimeout(function() {
                   if(callbackCalled !== true){
-                    console.log("Time out!")
                     response = {
                       error: "Time out! Wait time for response exceeded: " + waitForResponse,
                       request: message
@@ -153,8 +152,6 @@ describe.only('HTTP Request', function(){
                 }, waitForResponse)
 
                 chrome.runtime.sendMessage(extId, message, function(response){
-                  console.log("Received response in the page")
-                  console.log(response)
                   callback(response);
 
                   clearTimeout(timeout);
@@ -172,7 +169,6 @@ describe.only('HTTP Request', function(){
               };
 
               helpers.executeAsync([fn, extensionId, dataToSend], function(err, result){
-                console.log(result);
                 lastExtensionResponse = result.value;
                 done(err)
               });
@@ -210,7 +206,6 @@ describe.only('HTTP Request', function(){
 
         it("the browser should get the response",function(){
           httpResponse = lastExtensionResponse['data']['httpResponse'];
-          console.log(httpResponse)
 
           assert.isObject(httpResponse);
           assert.equal(httpResponse['body'], transaction['response']['body']);
