@@ -29,12 +29,5 @@
     "sinon": "^1.17.5",
     "watch-run": "^1.2.4",
     "webdriverio": "^4.2.1"
-  },
-  "dependencies": {
-    "http-browserify": "^1.7.0",
-    "stream-http": "^2.3.1"
-  },
-  "browser": {
-    "http": "stream-http"
   }
 }
