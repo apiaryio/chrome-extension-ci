@@ -24,8 +24,7 @@ var helpers = require('../webdriver-helpers')(client);
 
 var transaction = {
   request: {
-    //url: "http://localhost:3001/message",
-    url: "http://private-04ecc3-swaggernewapi.apiary-mock.com/message",
+    url: "http://localhost:3001/message",
     method: "post",
     headers: {
       "X-first-request-header": "first-request-value",
@@ -55,7 +54,6 @@ var configureExpressEndpoint = function(transaction, app){
   var tRes = transaction['response'];
   var uri = url.parse(tReq['url'])['pathname']
   app[tReq['method']](uri, function(req, res){
-    console.log(req.headers)
     lastRequest = {
       body: req['body'],
       method: req['method'],
@@ -97,7 +95,7 @@ describe.only('HTTP Request', function(){
       app = express();
       app.use(function(req, res, next){
         req.pipe(concat(function(data){
-          req.body = data;
+          req.body = String(data);
           next();
         }));
       })
@@ -224,8 +222,7 @@ describe.only('HTTP Request', function(){
             assert.property(httpResponse['headers'], lowCasedKey)
             assert.equal(
               httpResponse['headers'][lowCasedKey],
-
-              transaction['request']['headers'][key]
+              transaction['response']['headers'][key]
             )
           })
 
