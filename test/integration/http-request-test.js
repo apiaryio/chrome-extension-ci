@@ -67,7 +67,7 @@ var configureExpressEndpoint = function(transaction, app){
   });
 }
 
-describe.only('HTTP Request', function(){
+describe('HTTP Request', function(){
   this.timeout(60000);
 
   before(function(done){
