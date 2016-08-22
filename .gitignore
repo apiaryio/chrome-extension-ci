@@ -14,3 +14,5 @@ cov.*
 # List specific to .gitignore
 node_modules
 .idea/
+
+.DS_Store

@@ -8,7 +8,6 @@
       "https://*.second.first:3000/*"
     ]
   },
-
   "background": {
     "scripts": [
       "js/build.js",

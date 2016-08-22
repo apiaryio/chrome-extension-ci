@@ -25,10 +25,11 @@ describe('Webdriver.io', function(){
   });
 
   afterEach(function(done){
-    client.end().call(done)
+    //client.end().call(done)
+    done();
   });
 
-  describe ('when I go to the extension page', function(){
+  describe('when I go to the extension page', function(){
     it('the page should have the extension name listed', function(done){
       var extensionName = helpers.getExtensionName()
       client
@@ -48,6 +49,20 @@ describe('Webdriver.io', function(){
         assert.lengthOf(extensionId, 32);
         done();
       })
+    });
+
+    it.only('I should be able to open the background page inspector', function(done){
+      helpers.getExtensionId(function(err, extensionId){
+        var debugTabId
+        client
+          .click("#" + extensionId + " .active-views a")
+          .getTabIds()
+          .then(function(tabs){
+            debugTabId = tabs[1]
+          })
+          .switchTab(debugTabId)
+          .call()
+      });
     });
   });
 
