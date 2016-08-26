@@ -39,10 +39,10 @@ $ npm test
 
 # External doc
 
-[Chrome Extension Cross-Origin XHR](https://developer.chrome.com/extensions/xhr)
-[Chrome Extension Background page](https://developer.chrome.com/extensions/background_pages)
-[Chrome Extension Manifest File format](https://developer.chrome.com/extensions/manifest)
-[Chrome Extension Permissions in manifest.json](https://developer.chrome.com/extensions/declare_permissions)
-[Web page communicastion to Chrome Extension](https://developer.chrome.com/extensions/messaging#external-webpage)
-[Chrome Extension Debugging](https://developer.chrome.com/extensions/tut_debugging)
-[Chrome Extension HTTP interception API](https://developer.chrome.com/extensions/webRequest)
+- [Chrome Extension Cross-Origin XHR](https://developer.chrome.com/extensions/xhr)
+- [Chrome Extension Background page](https://developer.chrome.com/extensions/background_pages)
+- [Chrome Extension Manifest File format](https://developer.chrome.com/extensions/manifest)
+- [Chrome Extension Permissions in manifest.json](https://developer.chrome.com/extensions/declare_permissions)
+- [Web page communicastion to Chrome Extension](https://developer.chrome.com/extensions/messaging#external-webpage)
+- [Chrome Extension Debugging](https://developer.chrome.com/extensions/tut_debugging)
+- [Chrome Extension HTTP interception API](https://developer.chrome.com/extensions/webRequest)
