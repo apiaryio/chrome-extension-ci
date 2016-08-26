@@ -15,5 +15,9 @@
       "js/background.js"
     ],
     "persistent": false
-  }
+  },
+
+  "permissions": [
+    "http://*/*"
+  ]
 }
