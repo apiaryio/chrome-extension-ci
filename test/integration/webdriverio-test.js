@@ -25,8 +25,7 @@ describe('Webdriver.io', function(){
   });
 
   afterEach(function(done){
-    //client.end().call(done)
-    done();
+    client.end().call(done)
   });
 
   describe('when I go to the extension page', function(){
@@ -51,16 +50,22 @@ describe('Webdriver.io', function(){
       })
     });
 
-    it.only('I should be able to open the background page inspector', function(done){
+    it('I should be able to open the background page inspector', function(done){
       helpers.getExtensionId(function(err, extensionId){
-        var debugTabId
         client
           .click("#" + extensionId + " .active-views a")
           .getTabIds()
           .then(function(tabs){
             debugTabId = tabs[1]
+            client
+              .switchTab(debugTabId)
+              .waitForExist('html')
+              .getHTML("html")
+              .then(function(text){
+                assert.include(text, "devtools")
+              })
+              .call(done)
           })
-          .switchTab(debugTabId)
           .call()
       });
     });
@@ -86,7 +91,6 @@ describe('Webdriver.io', function(){
 
       fn = function(number1, number2, callback) {
         var result = number1 + number2;
-        console.log(callback);
         callback(result);
         return("not a return value");
       };
