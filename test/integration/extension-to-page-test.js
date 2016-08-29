@@ -99,9 +99,9 @@ describe('Extension to web page integration', function(){
                   data: "Booboo"
                 }
                 chrome.runtime.sendMessage(extId, message, function(response){
-                  callback(response)
+                  callback(response);
                 });
-              }
+              };
 
               client
                 .url(scheme + '://third.second.first:3000/')

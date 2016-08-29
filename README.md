@@ -18,6 +18,12 @@
 
 ## How to TDD the unpacked chrome extension locally
 
+- Add this line to your `/etc/hosts`
+
+```
+127.0.0.1 localhost fourth.third.second.first third.second.first
+```
+
 
 - Install NPM dependecies
 ```

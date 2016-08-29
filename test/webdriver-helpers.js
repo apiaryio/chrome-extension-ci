@@ -4,6 +4,21 @@ helpers = function(browserInstance){
 
   returnObject = {}
 
+  // It doesn't work ATM
+  // returnObject.messageExtension = function(extensionId, message, callback){
+  //   fn = function(extId, callback){
+  //     message = {
+  //       action: "echo",
+  //       data: "Booboo"
+  //     }
+  //     chrome.runtime.sendMessage(extId, message, function(response){
+  //       callback(response)
+  //     });
+  //   }
+
+  //   return(returnObject.executeAsync([fn, extensionId], callback));
+  // };
+
   returnObject.getExtensionName = function(){
     var manifestFile = 'manifest.json'
     var manifest = JSON.parse(fs.readFileSync(manifestFile).toString());

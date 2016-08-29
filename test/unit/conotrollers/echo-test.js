@@ -2,9 +2,9 @@ assert = require('chai').assert
 echoController = require('../../../src/controllers/echo')
 sinon = require('sinon')
 
-describe("Echo controller", function(){
+describe.only("Echo controller", function(){
   it('is a fuction',function(){
-    assert.isFunction(echoController)
+    assert.isFunction(dispatcher)
   })
 
   describe("When called", function(){
