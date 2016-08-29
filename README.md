@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/apiaryio/chrome-extension-ci.svg?branch=master)](https://travis-ci.org/apiaryio/chrome-extension-ci)
 
 
-## The Stack
+## The TDD/BDD Friendly Stack
 
 - [Node.js](https://nodejs.org/en/) - Programming Language
 - [Mocha](https://mochajs.org/) - Node.js test frameworks
@@ -13,6 +13,8 @@
 - [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/capabilities) -Selenium driver for commanding Chrome
 - [xvfb](https://docs.travis-ci.com/user/gui-and-headless-browsers/) (for headless Chrome in the CI) - Virtaul frame buffer for X server
 - [Travis CI](https://travis-ci.org) - the CI
+
+![Architecture Diagram](./doc/diagram.png)
 
 ## How to TDD the unpacked chrome extension locally
 
