@@ -46,3 +46,5 @@ $ npm test
 - [Web page communicastion to Chrome Extension](https://developer.chrome.com/extensions/messaging#external-webpage)
 - [Chrome Extension Debugging](https://developer.chrome.com/extensions/tut_debugging)
 - [Chrome Extension HTTP interception API](https://developer.chrome.com/extensions/webRequest)
+- [Chrome Debugger Protocol](https://developer.chrome.com/devtools/docs/debugger-protocol)
+- [Chrome Extension Debugger API](https://developer.chrome.com/extensions/debugger)
