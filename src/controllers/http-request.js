@@ -42,7 +42,8 @@ httpRequestController = function(request, sender, sendResponse){
     }
   };
 
-  var body = "Hello world!";
+
+  var body = httpRequest['body']
 
   request.send(body);
 
